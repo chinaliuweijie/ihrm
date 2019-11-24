@@ -16,6 +16,26 @@ public class Result {
     private String message;//返回信息
     private Object data;// 返回数据
 
+    public static Result create(Object result){
+        return create(result, 10000,true);
+    }
+
+
+    public static Result create(Object result, Integer code,Boolean success){
+        return create(result,code,success,"");
+    }
+
+    public static Result create(Object result, Integer code,Boolean success,String message){
+        Result type = new Result();
+        type.setCode(code);
+        type.setData(result);
+        type.setSuccess(success);
+        type.setMessage(message);
+        return type;
+    }
+
+
+
     public Result(ResultCode code) {
         this.success = code.success;
         this.code = code.code;
