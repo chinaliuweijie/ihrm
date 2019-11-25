@@ -6,14 +6,19 @@ import com.ihrm.common.entity.ResultCode;
 import com.ihrm.common.error.BusinessException;
 import com.ihrm.common.error.EmBusinessError;
 import com.ihrm.company.service.CompanyService;
-import com.ihrm.domain.company.CoCompanyEntity;
+import com.ihrm.domain.company.entity.CoCompanyEntity;
+import com.ihrm.domain.company.params.AddCompanyRaram;
+import org.hibernate.validator.constraints.Length;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/company")
+@Validated
 public class CompanyController extends BaseController {
     @Autowired
     private CompanyService companyService;
@@ -22,9 +27,10 @@ public class CompanyController extends BaseController {
      * 添加企业
      */
     @RequestMapping(value = "", method = RequestMethod.POST)
-    public Result add(@RequestBody CoCompanyEntity company) throws Exception {
-        companyService.add(company);
-
+    public Result add(@Validated @RequestBody AddCompanyRaram company) throws Exception {
+        CoCompanyEntity coCompanyEntity = new CoCompanyEntity();
+        BeanUtils.copyProperties(company,coCompanyEntity);
+        companyService.add(coCompanyEntity);
         return Result.SUCCESS();
     }
 
@@ -59,8 +65,9 @@ public class CompanyController extends BaseController {
      *     * 根据ID获取公司信息
      *    
      */
+
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Result findById(@PathVariable(name = "id") String id) throws Exception {
+    public Result findById(@Length(min=1,max=5)	  @PathVariable(name = "id") String id) throws Exception {
         CoCompanyEntity company = companyService.findById(id);
         if(company == null){
             throw new BusinessException(EmBusinessError.USER_NOT_EXIST);

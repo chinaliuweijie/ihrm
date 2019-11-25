@@ -1,15 +1,12 @@
 package com.ihrm.company.service;
 
-import com.ihrm.common.error.BusinessException;
-import com.ihrm.common.error.EmBusinessError;
 import com.ihrm.common.utils.IdWorker;
 import com.ihrm.company.dao.CompanyDao;
-import com.ihrm.domain.company.CoCompanyEntity;
+import com.ihrm.domain.company.entity.CoCompanyEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 

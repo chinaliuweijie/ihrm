@@ -1,4 +1,4 @@
-package com.ihrm.domain.company;
+package com.ihrm.domain.company.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
