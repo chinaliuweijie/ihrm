@@ -25,6 +25,11 @@ public class BaseController {
         if(ex instanceof BusinessException){
             BusinessException businessException = (BusinessException)ex;
             return Result.create(ex.getMessage(), businessException.getErrCode(), false,businessException.getErrMsg());
+        }else if(ex instanceof  javax.validation.ConstraintViolationException){
+            // 参数错误
+            responseData.put("errCode", EmBusinessError.PARAMETER_VALIDATION_ERROR.getErrCode());
+            responseData.put("errMsg", EmBusinessError.PARAMETER_VALIDATION_ERROR.getErrMsg());
+            return Result.create(ex.getMessage(), EmBusinessError.PARAMETER_VALIDATION_ERROR.getErrCode(), false,EmBusinessError.PARAMETER_VALIDATION_ERROR.getErrMsg());
         }else{
             responseData.put("errCode", EmBusinessError.UNKNOWN_ERROR.getErrCode());
             responseData.put("errMsg", EmBusinessError.UNKNOWN_ERROR.getErrMsg());
