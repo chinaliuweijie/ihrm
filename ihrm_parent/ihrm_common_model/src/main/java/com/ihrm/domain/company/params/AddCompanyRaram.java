@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.sql.Timestamp;
@@ -34,8 +36,11 @@ public class AddCompanyRaram {
     private String remarks;
     private String auditState;
    // @Size(min = 1,max = 10,message = "状态必须在1-10")
+    @Min(value = 1, message = "状态必须在1-10")
+    @Max(value = 10, message = "状态必须在1-10")
     private byte state;
    // @Size(min = 0,message = "当前余额必须大于0")
+    @Min(value = 0, message = "当前余额必须大于0")
     private double balance;
     @NotNull(message = "创建时间不能为空")
     @JsonFormat(timezone = "Asia/Shanghai", pattern = "yyyy-MM-dd HH:mm:ss")
