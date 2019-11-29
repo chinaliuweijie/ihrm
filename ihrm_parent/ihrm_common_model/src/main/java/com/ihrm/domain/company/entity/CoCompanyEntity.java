@@ -3,12 +3,13 @@ package com.ihrm.domain.company.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
 @Table(name = "co_company", schema = "ihrm", catalog = "")
-public class CoCompanyEntity {
+public class CoCompanyEntity implements Serializable {
     private String id;
     private String name;
     private String managerId;

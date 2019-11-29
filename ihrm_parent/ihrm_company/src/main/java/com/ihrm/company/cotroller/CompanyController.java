@@ -38,17 +38,16 @@ public class CompanyController extends BaseController {
      * 根据id更新企业信息
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public Result update(@PathVariable(name = "id") String id, @RequestBody CoCompanyEntity company) throws Exception {
+    public Result update(@PathVariable(name = "id") String id, @Validated @RequestBody AddCompanyRaram company) throws Exception {
         CoCompanyEntity one = companyService.findById(id);
         if(one == null){
             throw new BusinessException(EmBusinessError.USER_NOT_EXIST);
         }
-
         one.setName(company.getName());
         one.setRemarks(company.getRemarks());
         one.setState(company.getState());
         one.setAuditState(company.getAuditState());
-        companyService.update(company);
+        companyService.update(one);
         return Result.SUCCESS();
     }
 

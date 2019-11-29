@@ -2,8 +2,9 @@ package com.ihrm.domain.company.params;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.sql.Timestamp;
@@ -11,11 +12,11 @@ import java.sql.Timestamp;
 @Data
 public class AddCompanyRaram {
 
-    @NotEmpty(message = "用户id不能为空")
+    @NotBlank(message = "用户id不能为空")
     private String id;
-    @NotEmpty(message = "公司名称不能为空")
+    @NotBlank(message = "公司名称不能为空")
     private String name;
-    @NotEmpty(message = "企业登录账号ID不能为空")
+    @NotBlank(message = "企业登录账号ID不能为空")
     private String managerId;
 
     private String version;
@@ -33,7 +34,7 @@ public class AddCompanyRaram {
     private String industry;
     private String remarks;
     private String auditState;
-   // @Size(min = 1,max = 10,message = "状态必须在1-10")
+    @Size(min = 1,max = 10,message = "状态必须在1-10")
     private byte state;
    // @Size(min = 0,message = "当前余额必须大于0")
     private double balance;

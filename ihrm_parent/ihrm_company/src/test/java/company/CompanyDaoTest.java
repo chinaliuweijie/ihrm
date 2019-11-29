@@ -8,7 +8,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Arrays;
+import java.util.List;
 
 
 @SpringBootTest(classes = CompanyApplication.class)
@@ -20,10 +28,23 @@ public class CompanyDaoTest {
     private CompanyDao companyDao;
 
     @Test
+    @Transactional
+    @Rollback(value = false)
     public void test(){
+//
+//        CoCompanyEntity coCompanyEntity = companyDao.findById("1").get();
+//        System.out.println(coCompanyEntity);
+//
+//
+//        CoCompanyEntity companyEntity = companyDao.findByName("巍峨");
+//        System.out.println(companyEntity);
+//
+//        companyDao.updateCompany("无敌是多么的寂寞,无敌是多么的空虚","1");
 
-        CoCompanyEntity coCompanyEntity = companyDao.findById("1").get();
-        System.out.println(coCompanyEntity);
+        List<CoCompanyEntity> sqlAll = companyDao.findSqlAll("无敌%");
+        for (CoCompanyEntity objects:sqlAll) {
+            System.out.println(objects);
+        }
     }
 
 
