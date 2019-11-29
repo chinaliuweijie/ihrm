@@ -38,7 +38,11 @@ public class CompanyController extends BaseController {
      * 根据id更新企业信息
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+<<<<<<< HEAD
     public Result update(@PathVariable(name = "id") String id, @Validated @RequestBody AddCompanyRaram company) throws Exception {
+=======
+    public Result update(@PathVariable(name = "id") String id, @RequestBody AddCompanyRaram company) throws Exception {
+>>>>>>> 5e970a3a01527fc8153197c8e9b84b0156375418
         CoCompanyEntity one = companyService.findById(id);
         if(one == null){
             throw new BusinessException(EmBusinessError.USER_NOT_EXIST);
