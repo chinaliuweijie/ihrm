@@ -1,12 +1,11 @@
 package com.ihrm.company.dao;
 
 import com.ihrm.domain.company.entity.CoCompanyEntity;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -26,6 +25,8 @@ public interface CompanyDao extends JpaRepository<CoCompanyEntity,String>, JpaSp
     CoCompanyEntity findByName(String name);
 
 
+
+    @Transactional
     @Query(value = "update CoCompanyEntity set name=?1 where id = ?2")
     @Modifying
     void updateCompany(String name,String id);
